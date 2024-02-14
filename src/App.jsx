@@ -29,11 +29,11 @@ function App() {
             base_currency: codeToCurrency,
             currencies: codeFromCurrency
           }
-        }).then(response  => setResultCurrency(response.data.data[codeFromCurrency]))
+        }).then(response  => setResultCurrency(response.data.data[codeToCurrency]))
         .catch(error => console.log(error))
       }
   }, [firstCurrency])
-  console.log(resultCurrency)
+  // console.log(resultCurrency)
 
   const boxStyle={
     background: "#fdfdfd",
