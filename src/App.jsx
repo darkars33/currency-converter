@@ -1,4 +1,4 @@
-import { Button, Container, Typography, Grid } from '@mui/material'
+import { Button, Container, Typography, Grid, Box } from '@mui/material'
 import { useContext, useEffect, useState } from 'react'
 import InputAmount from './Component/InputAmount'
 import SelectCountry from './Component/SelectCountry'
@@ -14,12 +14,11 @@ function App() {
     setToCurrency,
     firstCurrency, 
   }= useContext(CurrencyContext)
-  console.log(firstCurrency)
 
   const [resultCurrency, setResultCurrency]= useState("")
-  const codeFromCurrency= fromCurrency.slice(5,9);
-  const codeToCurrency= toCurrency.slice(5,9);
-  // console.log(codeFromCurrency)
+  const codeFromCurrency= fromCurrency.split(" ")[1];
+  const codeToCurrency= toCurrency.split(" ")[1];
+  console.log(codeFromCurrency);
 
   useEffect(() =>{
       if(firstCurrency){
@@ -29,11 +28,11 @@ function App() {
             base_currency: codeToCurrency,
             currencies: codeFromCurrency
           }
-        }).then(response  => setResultCurrency(response.data.data[codeToCurrency]))
+        }).then(response  => setResultCurrency(response.data.data[codeFromCurrency]*firstCurrency))
         .catch(error => console.log(error))
       }
   }, [firstCurrency])
-  // console.log(resultCurrency)
+  console.log(resultCurrency);
 
   const boxStyle={
     background: "#fdfdfd",
@@ -56,6 +55,14 @@ function App() {
         <SwitchCurrency />
         <SelectCountry value={toCurrency} setValue={setToCurrency} label="To"/>
       </Grid>
+
+      {firstCurrency ? (
+        <Box sx={{textAlign:"left", marginTop:"1rem"}}>
+          <Typography>{firstCurrency} {fromCurrency} =</Typography>
+          <Typography variant="h5" sx={{fontWeight:"bold", marginBottom:"5px"}}>{resultCurrency} {toCurrency}</Typography>
+        </Box>
+      ) : ""}
+
     </Container>
     </>
   )

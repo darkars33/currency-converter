@@ -21,17 +21,16 @@ function SelectCountry(props) {
   const dataFilter= data.filter((item) => "currencies" in item);
   // console.log(dataFilter);
   const dataCountry= dataFilter.map((item) =>{
-    // return `${item.flag} ${Object.keys(item.currencies)[0]} - ${item.name.common}`
+    return `${item.flag} ${Object.keys(item.currencies)[0]} - ${item.name.common}`
     // return {
     //   flag: item.flag,
     //   currency: Object.keys(item.currencies)[0],
     //   commonName: item.name.common
     // }
     // return "hello"
-    return [item.flag,"-", Object.keys(item.currencies)[0],"-", item.name.common]
   })
 
-  console.log(dataCountry);
+  // console.log(dataCountry);
   return (
 
       <Grid item xs={12} md={3}>
